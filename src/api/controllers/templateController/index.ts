@@ -1,0 +1,1 @@
+export { templateController } from './templateController';

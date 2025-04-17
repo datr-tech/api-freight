@@ -1,0 +1,12 @@
+import { Router } from 'express';
+import { options } from '@freight/common-router-options';
+import { templateRouterCreateTemplate } from './templateRouterCreateTemplate';
+import { templateRouterDeleteTemplate } from './templateRouterDeleteTemplate';
+import { templateRouterReadTemplate } from './templateRouterReadTemplate';
+import { templateRouterUpdateTemplate } from './templateRouterUpdateTemplate';
+
+export const templateRouter = Router(options)
+  .use('/', templateRouterCreateTemplate)
+  .use('/:templateId', templateRouterDeleteTemplate)
+  .use('/:templateId', templateRouterReadTemplate)
+  .use('/:templateId', templateRouterUpdateTemplate);

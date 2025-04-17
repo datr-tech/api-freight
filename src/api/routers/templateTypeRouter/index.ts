@@ -1,0 +1,1 @@
+export { templateTypeRouter } from './templateTypeRouter';
