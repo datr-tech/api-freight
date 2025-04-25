@@ -1,5 +1,5 @@
-import { Router } from 'express';
 import { options } from '@datr.tech/leith-config-api-router-options';
+import { Router } from 'express';
 import { campaignTypeRouterCreateCampaignType } from './campaignTypeRouterCreateCampaignType';
 import { campaignTypeRouterDeleteCampaignType } from './campaignTypeRouterDeleteCampaignType';
 import { campaignTypeRouterReadCampaignType } from './campaignTypeRouterReadCampaignType';

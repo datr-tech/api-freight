@@ -1,8 +1,14 @@
-import { Request, Response, Router } from 'express';
-import { checkExact, checkSchema, matchedData, Schema, validationResult } from 'express-validator';
-import { options } from '@datr.tech/leith-config-api-router-options';
+import { projectTypeController } from '@app-af/api/controllers/projectTypeController';
 import { projectTypeValidationSchemaDeleteProjectType } from '@datr.tech/cargo-router-validation-schemas-freight';
-import { projectTypeController } from '@app/api/controllers/projectTypeController';
+import { options } from '@datr.tech/leith-config-api-router-options';
+import { Request, Response, Router } from 'express';
+import {
+  checkExact,
+  checkSchema,
+  matchedData,
+  Schema,
+  validationResult,
+} from 'express-validator';
 
 export const projectTypeRouterDeleteProjectType = Router(options).get(
   '/',
@@ -13,7 +19,9 @@ export const projectTypeRouterDeleteProjectType = Router(options).get(
 
     if (errors.isEmpty()) {
       const { projectTypeId } = matchedData(req);
-      const deleteResponse = await projectTypeController.deleteProjectType({ projectTypeId });
+      const deleteResponse = await projectTypeController.deleteProjectType({
+        projectTypeId,
+      });
 
       res.status(200).send({ deleteResponse });
     } else {

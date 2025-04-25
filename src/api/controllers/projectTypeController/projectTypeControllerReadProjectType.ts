@@ -1,4 +1,4 @@
-import { ProjectTypeModel } from '@app/api/models';
+import { ProjectTypeModel } from '@app-af/api/models';
 
 export const projectTypeControllerReadProjectType = async ({ projectTypeId }) => {
   const projectType = await ProjectTypeModel.findById(projectTypeId);

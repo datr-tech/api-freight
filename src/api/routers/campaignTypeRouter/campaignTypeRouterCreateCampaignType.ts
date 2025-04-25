@@ -1,9 +1,15 @@
-import { Request, Response, Router } from 'express';
-import { checkExact, checkSchema, matchedData, Schema, validationResult } from 'express-validator';
-import { options } from '@datr.tech/leith-config-api-router-options';
+import { campaignTypeController } from '@app-af/api/controllers/campaignTypeController';
+import { ICampaignTypeModel } from '@app-af/interfaces/api/models/ICampaignTypeModel';
 import { campaignTypeValidationSchemaCreateCampaignType } from '@datr.tech/cargo-router-validation-schemas-freight';
-import { campaignTypeController } from '@app/api/controllers/campaignTypeController';
-import { ICampaignTypeModel } from '@app/interfaces/api/models/ICampaignTypeModel';
+import { options } from '@datr.tech/leith-config-api-router-options';
+import { Request, Response, Router } from 'express';
+import {
+  checkExact,
+  checkSchema,
+  matchedData,
+  Schema,
+  validationResult,
+} from 'express-validator';
 
 export const campaignTypeRouterCreateCampaignType = Router(options).post(
   '/',
@@ -14,7 +20,8 @@ export const campaignTypeRouterCreateCampaignType = Router(options).post(
 
     if (errors.isEmpty()) {
       const validatedParams = matchedData<ICampaignTypeModel>(req);
-      const campaignTypeId = await campaignTypeController.createCampaignType(validatedParams);
+      const campaignTypeId =
+        await campaignTypeController.createCampaignType(validatedParams);
 
       res.status(201).send({ campaignTypeId });
     } else {

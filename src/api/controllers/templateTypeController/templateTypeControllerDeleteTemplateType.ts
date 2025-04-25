@@ -1,5 +1,5 @@
+import { TemplateTypeModel } from '@app-af/api/models';
 import { Types } from 'mongoose';
-import { TemplateTypeModel } from '@app/api/models';
 
 export const templateTypeControllerDeleteTemplateType = async ({ templateTypeId }) => {
   const res = await TemplateTypeModel.findOneAndUpdate(

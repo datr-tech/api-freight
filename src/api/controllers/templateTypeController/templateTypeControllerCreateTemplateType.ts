@@ -1,7 +1,12 @@
+import { TemplateTypeModel } from '@app-af/api/models';
 import { Types } from 'mongoose';
-import { TemplateTypeModel } from '@app/api/models';
 
-export const templateTypeControllerCreateTemplateType = async ({ description, name, adminStatusId, adminUserId }) => {
+export const templateTypeControllerCreateTemplateType = async ({
+  description,
+  name,
+  adminStatusId,
+  adminUserId,
+}) => {
   const templateTypeId = new Types.ObjectId();
   const modelParams = {
     templateTypeId,

@@ -1,8 +1,14 @@
-import { Request, Response, Router } from 'express';
-import { checkExact, checkSchema, matchedData, Schema, validationResult } from 'express-validator';
-import { options } from '@datr.tech/leith-config-api-router-options';
+import { templateController } from '@app-af/api/controllers/templateController';
 import { templateValidationSchemaDeleteTemplate } from '@datr.tech/cargo-router-validation-schemas-freight';
-import { templateController } from '@app/api/controllers/templateController';
+import { options } from '@datr.tech/leith-config-api-router-options';
+import { Request, Response, Router } from 'express';
+import {
+  checkExact,
+  checkSchema,
+  matchedData,
+  Schema,
+  validationResult,
+} from 'express-validator';
 
 export const templateRouterDeleteTemplate = Router(options).get(
   '/',

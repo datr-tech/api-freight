@@ -1,4 +1,4 @@
-import { TemplateTypeModel } from '@app/api/models';
+import { TemplateTypeModel } from '@app-af/api/models';
 
 export const modelValidatorTemplateTypeId = async (doc, next) => {
   let templateType;

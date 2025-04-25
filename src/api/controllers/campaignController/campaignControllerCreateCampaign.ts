@@ -1,5 +1,5 @@
+import { CampaignModel } from '@app-af/api/models';
 import { Types } from 'mongoose';
-import { CampaignModel } from '@app/api/models';
 
 export const campaignControllerCreateCampaign = async ({
   campaignTypeId,

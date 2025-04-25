@@ -1,6 +1,9 @@
-import { ProjectTypeModel } from '@app/api/models';
+import { ProjectTypeModel } from '@app-af/api/models';
 
-export const projectTypeControllerUpdateProjectType = async ({ projectTypeId, payload }) => {
+export const projectTypeControllerUpdateProjectType = async ({
+  projectTypeId,
+  payload,
+}) => {
   const res = await ProjectTypeModel.findOneAndUpdate(
     {
       _id: projectTypeId,

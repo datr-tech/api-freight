@@ -1,4 +1,4 @@
-import { TemplateModel } from '@app/api/models';
+import { TemplateModel } from '@app-af/api/models';
 
 export const templateControllerReadTemplate = async ({ templateId }) => {
   const template = await TemplateModel.findById(templateId);

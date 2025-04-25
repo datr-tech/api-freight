@@ -1,7 +1,12 @@
+import { CampaignTypeModel } from '@app-af/api/models';
 import { Types } from 'mongoose';
-import { CampaignTypeModel } from '@app/api/models';
 
-export const campaignTypeControllerCreateCampaignType = async ({ description, name, adminStatusId, adminUserId }) => {
+export const campaignTypeControllerCreateCampaignType = async ({
+  description,
+  name,
+  adminStatusId,
+  adminUserId,
+}) => {
   const campaignTypeId = new Types.ObjectId();
   const modelParams = {
     campaignTypeId,

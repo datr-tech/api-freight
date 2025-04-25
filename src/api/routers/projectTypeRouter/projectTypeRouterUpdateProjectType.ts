@@ -1,8 +1,14 @@
-import { Request, Response, Router } from 'express';
-import { checkExact, checkSchema, matchedData, Schema, validationResult } from 'express-validator';
-import { options } from '@datr.tech/leith-config-api-router-options';
+import { projectTypeController } from '@app-af/api/controllers/projectTypeController';
 import { projectTypeValidationSchemaUpdateProjectType } from '@datr.tech/cargo-router-validation-schemas-freight';
-import { projectTypeController } from '@app/api/controllers/projectTypeController';
+import { options } from '@datr.tech/leith-config-api-router-options';
+import { Request, Response, Router } from 'express';
+import {
+  checkExact,
+  checkSchema,
+  matchedData,
+  Schema,
+  validationResult,
+} from 'express-validator';
 
 export const projectTypeRouterUpdateProjectType = Router(options).patch(
   '/',
@@ -13,7 +19,10 @@ export const projectTypeRouterUpdateProjectType = Router(options).patch(
 
     if (errors.isEmpty()) {
       const { projectTypeId, ...payload } = matchedData(req);
-      const updateStatus = await projectTypeController.updateProjectType({ projectTypeId, payload });
+      const updateStatus = await projectTypeController.updateProjectType({
+        projectTypeId,
+        payload,
+      });
 
       res.status(200).send({ updateStatus });
     } else {

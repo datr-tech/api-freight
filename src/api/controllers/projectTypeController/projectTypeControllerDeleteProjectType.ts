@@ -1,5 +1,5 @@
+import { ProjectTypeModel } from '@app-af/api/models';
 import { Types } from 'mongoose';
-import { ProjectTypeModel } from '@app/api/models';
 
 export const projectTypeControllerDeleteProjectType = async ({ projectTypeId }) => {
   const res = await ProjectTypeModel.findOneAndUpdate(

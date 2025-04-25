@@ -1,6 +1,9 @@
-import { CampaignTypeModel } from '@app/api/models';
+import { CampaignTypeModel } from '@app-af/api/models';
 
-export const campaignTypeControllerUpdateCampaignType = async ({ campaignTypeId, payload }) => {
+export const campaignTypeControllerUpdateCampaignType = async ({
+  campaignTypeId,
+  payload,
+}) => {
   const res = await CampaignTypeModel.findOneAndUpdate(
     {
       _id: campaignTypeId,

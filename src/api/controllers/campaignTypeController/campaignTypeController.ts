@@ -1,7 +1,7 @@
 import { campaignTypeControllerCreateCampaignType } from './campaignTypeControllerCreateCampaignType';
-import { campaignTypeControllerUpdateCampaignType } from './campaignTypeControllerUpdateCampaignType';
-import { campaignTypeControllerReadCampaignType } from './campaignTypeControllerReadCampaignType';
 import { campaignTypeControllerDeleteCampaignType } from './campaignTypeControllerDeleteCampaignType';
+import { campaignTypeControllerReadCampaignType } from './campaignTypeControllerReadCampaignType';
+import { campaignTypeControllerUpdateCampaignType } from './campaignTypeControllerUpdateCampaignType';
 
 export const campaignTypeController = {
   createCampaignType: campaignTypeControllerCreateCampaignType,

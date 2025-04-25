@@ -1,6 +1,9 @@
-import { TemplateTypeModel } from '@app/api/models';
+import { TemplateTypeModel } from '@app-af/api/models';
 
-export const templateTypeControllerUpdateTemplateType = async ({ templateTypeId, payload }) => {
+export const templateTypeControllerUpdateTemplateType = async ({
+  templateTypeId,
+  payload,
+}) => {
   const res = await TemplateTypeModel.findOneAndUpdate(
     {
       _id: templateTypeId,

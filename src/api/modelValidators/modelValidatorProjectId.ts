@@ -1,4 +1,4 @@
-import { ProjectModel } from '@app/api/models';
+import { ProjectModel } from '@app-af/api/models';
 
 export const modelValidatorProjectId = async (doc, next) => {
   let project;

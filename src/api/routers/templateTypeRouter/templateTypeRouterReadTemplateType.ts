@@ -1,8 +1,14 @@
-import { Request, Response, Router } from 'express';
-import { checkExact, checkSchema, matchedData, Schema, validationResult } from 'express-validator';
-import { options } from '@datr.tech/leith-config-api-router-options';
+import { templateTypeController } from '@app-af/api/controllers/templateTypeController';
 import { templateTypeValidationSchemaReadTemplateType } from '@datr.tech/cargo-router-validation-schemas-freight';
-import { templateTypeController } from '@app/api/controllers/templateTypeController';
+import { options } from '@datr.tech/leith-config-api-router-options';
+import { Request, Response, Router } from 'express';
+import {
+  checkExact,
+  checkSchema,
+  matchedData,
+  Schema,
+  validationResult,
+} from 'express-validator';
 
 export const templateTypeRouterReadTemplateType = Router(options).get(
   '/',
@@ -13,7 +19,9 @@ export const templateTypeRouterReadTemplateType = Router(options).get(
 
     if (errors.isEmpty()) {
       const { templateTypeId } = matchedData(req);
-      const templateType = await templateTypeController.readTemplateType({ templateTypeId });
+      const templateType = await templateTypeController.readTemplateType({
+        templateTypeId,
+      });
 
       res.status(200).send({ templateType });
     } else {

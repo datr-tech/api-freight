@@ -1,12 +1,15 @@
-import { model, Schema } from 'mongoose';
-import { templateModelSchema, templateModelSchemaOptions } from '@datr.tech/parcel-model-schemas-freight';
 import {
-  modelValidatorCampaignId,
-  modelValidatorTemplateTypeId,
-  modelValidatorOwnerUserId,
   modelValidatorAdminStatusId,
   modelValidatorAdminUserId,
-} from '@app/api/modelValidators';
+  modelValidatorCampaignId,
+  modelValidatorOwnerUserId,
+  modelValidatorTemplateTypeId,
+} from '@app-af/api/modelValidators';
+import {
+  templateModelSchema,
+  templateModelSchemaOptions,
+} from '@datr.tech/parcel-model-schemas-freight';
+import { model, Schema } from 'mongoose';
 
 const templateSchema = new Schema(templateModelSchema, templateModelSchemaOptions);
 

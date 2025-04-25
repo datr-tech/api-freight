@@ -1,8 +1,14 @@
-import { Request, Response, Router } from 'express';
-import { checkExact, checkSchema, matchedData, Schema, validationResult } from 'express-validator';
-import { options } from '@datr.tech/leith-config-api-router-options';
+import { campaignTypeController } from '@app-af/api/controllers/campaignTypeController';
 import { campaignTypeValidationSchemaDeleteCampaignType } from '@datr.tech/cargo-router-validation-schemas-freight';
-import { campaignTypeController } from '@app/api/controllers/campaignTypeController';
+import { options } from '@datr.tech/leith-config-api-router-options';
+import { Request, Response, Router } from 'express';
+import {
+  checkExact,
+  checkSchema,
+  matchedData,
+  Schema,
+  validationResult,
+} from 'express-validator';
 
 export const campaignTypeRouterDeleteCampaignType = Router(options).get(
   '/',
@@ -13,7 +19,9 @@ export const campaignTypeRouterDeleteCampaignType = Router(options).get(
 
     if (errors.isEmpty()) {
       const { campaignTypeId } = matchedData(req);
-      const deleteResponse = await campaignTypeController.deleteCampaignType({ campaignTypeId });
+      const deleteResponse = await campaignTypeController.deleteCampaignType({
+        campaignTypeId,
+      });
 
       res.status(200).send({ deleteResponse });
     } else {

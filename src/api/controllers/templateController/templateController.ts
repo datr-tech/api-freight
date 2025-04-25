@@ -1,7 +1,7 @@
 import { templateControllerCreateTemplate } from './templateControllerCreateTemplate';
-import { templateControllerUpdateTemplate } from './templateControllerUpdateTemplate';
-import { templateControllerReadTemplate } from './templateControllerReadTemplate';
 import { templateControllerDeleteTemplate } from './templateControllerDeleteTemplate';
+import { templateControllerReadTemplate } from './templateControllerReadTemplate';
+import { templateControllerUpdateTemplate } from './templateControllerUpdateTemplate';
 
 export const templateController = {
   createTemplate: templateControllerCreateTemplate,

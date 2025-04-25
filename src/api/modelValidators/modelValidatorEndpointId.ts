@@ -1,4 +1,4 @@
-// import { EndpointModel } from '@app/api/models';
+// import { EndpointModel } from '@app-af/api/models';
 
 export const modelValidatorEndpointId = async (doc, next) => {
   let endpoint;

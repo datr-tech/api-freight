@@ -1,7 +1,12 @@
+import { ProjectTypeModel } from '@app-af/api/models';
 import { Types } from 'mongoose';
-import { ProjectTypeModel } from '@app/api/models';
 
-export const projectTypeControllerCreateProjectType = async ({ description, name, adminStatusId, adminUserId }) => {
+export const projectTypeControllerCreateProjectType = async ({
+  description,
+  name,
+  adminStatusId,
+  adminUserId,
+}) => {
   const projectTypeId = new Types.ObjectId();
   const modelParams = {
     projectTypeId,

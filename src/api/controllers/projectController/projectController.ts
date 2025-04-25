@@ -1,7 +1,7 @@
 import { projectControllerCreateProject } from './projectControllerCreateProject';
-import { projectControllerUpdateProject } from './projectControllerUpdateProject';
-import { projectControllerReadProject } from './projectControllerReadProject';
 import { projectControllerDeleteProject } from './projectControllerDeleteProject';
+import { projectControllerReadProject } from './projectControllerReadProject';
+import { projectControllerUpdateProject } from './projectControllerUpdateProject';
 
 export const projectController = {
   createProject: projectControllerCreateProject,

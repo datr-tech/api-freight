@@ -1,8 +1,14 @@
-import { Request, Response, Router } from 'express';
-import { checkExact, checkSchema, matchedData, Schema, validationResult } from 'express-validator';
-import { options } from '@datr.tech/leith-config-api-router-options';
+import { campaignController } from '@app-af/api/controllers/campaignController';
 import { campaignValidationSchemaUpdateCampaign } from '@datr.tech/cargo-router-validation-schemas-freight';
-import { campaignController } from '@app/api/controllers/campaignController';
+import { options } from '@datr.tech/leith-config-api-router-options';
+import { Request, Response, Router } from 'express';
+import {
+  checkExact,
+  checkSchema,
+  matchedData,
+  Schema,
+  validationResult,
+} from 'express-validator';
 
 export const campaignRouterUpdateCampaign = Router(options).patch(
   '/',
@@ -13,7 +19,10 @@ export const campaignRouterUpdateCampaign = Router(options).patch(
 
     if (errors.isEmpty()) {
       const { campaignId, ...payload } = matchedData(req);
-      const updateStatus = await campaignController.updateCampaign({ campaignId, payload });
+      const updateStatus = await campaignController.updateCampaign({
+        campaignId,
+        payload,
+      });
 
       res.status(200).send({ updateStatus });
     } else {

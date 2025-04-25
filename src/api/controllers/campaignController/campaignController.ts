@@ -1,7 +1,7 @@
 import { campaignControllerCreateCampaign } from './campaignControllerCreateCampaign';
-import { campaignControllerUpdateCampaign } from './campaignControllerUpdateCampaign';
-import { campaignControllerReadCampaign } from './campaignControllerReadCampaign';
 import { campaignControllerDeleteCampaign } from './campaignControllerDeleteCampaign';
+import { campaignControllerReadCampaign } from './campaignControllerReadCampaign';
+import { campaignControllerUpdateCampaign } from './campaignControllerUpdateCampaign';
 
 export const campaignController = {
   createCampaign: campaignControllerCreateCampaign,

@@ -1,4 +1,4 @@
-import { ProjectModel } from '@app/api/models';
+import { ProjectModel } from '@app-af/api/models';
 
 export const projectControllerUpdateProject = async ({ projectId, payload }) => {
   const res = await ProjectModel.findOneAndUpdate(

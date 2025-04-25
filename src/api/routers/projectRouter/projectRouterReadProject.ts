@@ -1,8 +1,14 @@
-import { Request, Response, Router } from 'express';
-import { checkExact, checkSchema, matchedData, Schema, validationResult } from 'express-validator';
-import { options } from '@datr.tech/leith-config-api-router-options';
+import { projectController } from '@app-af/api/controllers/projectController';
 import { projectValidationSchemaReadProject } from '@datr.tech/cargo-router-validation-schemas-freight';
-import { projectController } from '@app/api/controllers/projectController';
+import { options } from '@datr.tech/leith-config-api-router-options';
+import { Request, Response, Router } from 'express';
+import {
+  checkExact,
+  checkSchema,
+  matchedData,
+  Schema,
+  validationResult,
+} from 'express-validator';
 
 export const projectRouterReadProject = Router(options).get(
   '/',
