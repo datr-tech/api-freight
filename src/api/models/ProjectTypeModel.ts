@@ -1,5 +1,5 @@
 import { model, Schema } from 'mongoose';
-import { projectTypeModelSchema, projectTypeModelSchemaOptions } from '@freight/freight-model-schemas';
+import { projectTypeModelSchema, projectTypeModelSchemaOptions } from '@datr.tech/parcel-model-schemas-freight';
 import { modelValidatorAdminStatusId, modelValidatorAdminUserId } from '@app/api/modelValidators';
 
 const projectTypeSchema = new Schema(projectTypeModelSchema, projectTypeModelSchemaOptions);

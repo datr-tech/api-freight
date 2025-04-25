@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { options } from '@freight/common-router-options';
+import { options } from '@datr.tech/leith-config-api-router-options';
 import { projectRouterCreateProject } from './projectRouterCreateProject';
 import { projectRouterDeleteProject } from './projectRouterDeleteProject';
 import { projectRouterReadProject } from './projectRouterReadProject';

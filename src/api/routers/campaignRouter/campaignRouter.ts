@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { options } from '@freight/common-router-options';
+import { options } from '@datr.tech/leith-config-api-router-options';
 import { campaignRouterCreateCampaign } from './campaignRouterCreateCampaign';
 import { campaignRouterDeleteCampaign } from './campaignRouterDeleteCampaign';
 import { campaignRouterReadCampaign } from './campaignRouterReadCampaign';

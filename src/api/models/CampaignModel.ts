@@ -1,5 +1,5 @@
 import { model, Schema } from 'mongoose';
-import { campaignModelSchema, campaignModelSchemaOptions } from '@freight/freight-model-schemas';
+import { campaignModelSchema, campaignModelSchemaOptions } from '@datr.tech/parcel-model-schemas-freight';
 import {
   modelValidatorCampaignTypeId,
   modelValidatorOwnerUserId,

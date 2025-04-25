@@ -1,7 +1,7 @@
 import { Request, Response, Router } from 'express';
 import { checkExact, checkSchema, matchedData, Schema, validationResult } from 'express-validator';
-import { options } from '@freight/common-router-options';
-import { projectTypeValidationSchemaDeleteProjectType } from '@freight/freight-router-validation-schemas';
+import { options } from '@datr.tech/leith-config-api-router-options';
+import { projectTypeValidationSchemaDeleteProjectType } from '@datr.tech/cargo-router-validation-schemas-freight';
 import { projectTypeController } from '@app/api/controllers/projectTypeController';
 
 export const projectTypeRouterDeleteProjectType = Router(options).get(

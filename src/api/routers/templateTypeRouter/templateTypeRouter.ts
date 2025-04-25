@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { options } from '@freight/common-router-options';
+import { options } from '@datr.tech/leith-config-api-router-options';
 import { templateTypeRouterCreateTemplateType } from './templateTypeRouterCreateTemplateType';
 import { templateTypeRouterDeleteTemplateType } from './templateTypeRouterDeleteTemplateType';
 import { templateTypeRouterReadTemplateType } from './templateTypeRouterReadTemplateType';

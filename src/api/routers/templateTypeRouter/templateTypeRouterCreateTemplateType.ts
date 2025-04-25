@@ -1,7 +1,7 @@
 import { Request, Response, Router } from 'express';
 import { checkExact, checkSchema, matchedData, Schema, validationResult } from 'express-validator';
-import { options } from '@freight/common-router-options';
-import { templateTypeValidationSchemaCreateTemplateType } from '@freight/freight-router-validation-schemas';
+import { options } from '@datr.tech/leith-config-api-router-options';
+import { templateTypeValidationSchemaCreateTemplateType } from '@datr.tech/cargo-router-validation-schemas-freight';
 import { templateTypeController } from '@app/api/controllers/templateTypeController';
 import { ITemplateTypeModel } from '@app/interfaces/api/models/ITemplateTypeModel';
 
