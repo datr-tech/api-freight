@@ -1,9 +1,11 @@
-## README: @datr.tech/api-freight
+## @datr.tech/api-freight
 
 > API for freight - 0.4.2
 ---
 
-### Install locally
+### Installation
+
+#### Install locally
 
 Install the package from GitHub using the following commands.
 
@@ -17,6 +19,11 @@ Then install the required dependencies
 cd @datr.tech/api-freight
 npm i
 ```
+
+---
+
+### NPM commands
+
 #### Format
 
 Format code, config files and (when applicable) tests
@@ -25,7 +32,7 @@ Format code, config files and (when applicable) tests
 npm run format
 ```
 
-The formatting will be performed by Prettier, and the associated Prettier config can be found [here][./.prettierrc.json].
+The formatting will be performed by Prettier, and the associated Prettier config can be found [here](./.prettierrc.json).
 
 #### Lint
 
@@ -35,5 +42,5 @@ Lint code, config files and (when applicable) tests
 npm run lint
 ```
 
-The formatting will be performed by EsLint, and the associated config can be found from the following address [./eslint.config.mjs][./eslint.config.mjs].
+The formatting will be performed by EsLint, and the associated config can be found from the following address [./eslint.config.mjs](./eslint.config.mjs).
 
