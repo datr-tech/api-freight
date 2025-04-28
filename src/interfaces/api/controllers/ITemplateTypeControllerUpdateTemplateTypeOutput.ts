@@ -1,0 +1,6 @@
+import { ITemplateTypeControllerUpdateTemplateTypeOutputError } from './ITemplateTypeControllerUpdateTemplateTypeOutputError';
+import { ITemplateTypeControllerUpdateTemplateTypeOutputSuccess } from './ITemplateTypeControllerUpdateTemplateTypeOutputSuccess';
+
+export type ITemplateTypeControllerUpdateTemplateTypeOutput =
+  | ITemplateTypeControllerUpdateTemplateTypeOutputSuccess
+  | ITemplateTypeControllerUpdateTemplateTypeOutputError;

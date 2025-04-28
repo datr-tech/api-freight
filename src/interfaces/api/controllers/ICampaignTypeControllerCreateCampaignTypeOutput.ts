@@ -1,0 +1,6 @@
+import { ICampaignTypeControllerCreateCampaignTypeOutputError } from './ICampaignTypeControllerCreateCampaignTypeOutputError';
+import { ICampaignTypeControllerCreateCampaignTypeOutputSuccess } from './ICampaignTypeControllerCreateCampaignTypeOutputSuccess';
+
+export type ICampaignTypeControllerCreateCampaignTypeOutput =
+  | ICampaignTypeControllerCreateCampaignTypeOutputSuccess
+  | ICampaignTypeControllerCreateCampaignTypeOutputError;

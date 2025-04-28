@@ -1,0 +1,6 @@
+import { ITemplateTypeControllerDeleteTemplateTypeOutputError } from './ITemplateTypeControllerDeleteTemplateTypeOutputError';
+import { ITemplateTypeControllerDeleteTemplateTypeOutputSuccess } from './ITemplateTypeControllerDeleteTemplateTypeOutputSuccess';
+
+export type ITemplateTypeControllerDeleteTemplateTypeOutput =
+  | ITemplateTypeControllerDeleteTemplateTypeOutputSuccess
+  | ITemplateTypeControllerDeleteTemplateTypeOutputError;
