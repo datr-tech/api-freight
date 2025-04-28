@@ -1,0 +1,1 @@
+export { campaignTypeController } from './campaignTypeController';

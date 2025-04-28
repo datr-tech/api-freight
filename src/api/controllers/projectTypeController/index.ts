@@ -1,0 +1,1 @@
+export { projectTypeController } from './projectTypeController';
