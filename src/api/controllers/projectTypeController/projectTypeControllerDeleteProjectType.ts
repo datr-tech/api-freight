@@ -16,16 +16,24 @@ import { Types } from 'mongoose';
  * @param { Types.ObjectId } params.projectTypeId
  *
  * @returns { Promise<IProjectTypeControllerDeleteProjectTypeOutput> }
+ * @returns { Promise<IProjectTypeControllerDeleteProjectTypeOutputError> } ON ERROR: Promise<{ error: true, payload: { message }}>
+ * @returns { Promise<IProjectTypeControllerDeleteProjectTypeOutputSuccess> } ON SUCCESS: Promise<{ error: false, payload: { projectTypeModel }}>
  *
- * @example On succcess returns: Promise<{ error: false, payload: { projectTypeModel }}>
- * @example On failure returns: Promise<{ error: true, payload: { message }}> On failure
+ * @author Datr.Tech Admin <admin@datr.tech>
  */
 export const projectTypeControllerDeleteProjectType: IProjectTypeControllerDeleteProjectType =
   async ({ projectTypeId }) => {
     const stat = { ...baseStat };
 
     try {
-      await ProjectTypeModel.findOneAndUpdate(
+      /*
+       * Attempt to find an instance of 'ProjectTypeModel'
+       * using the received 'projectTypeId' param.
+       * When successful, perform a "soft delete" upon the
+       * found model by updating the value of the model's
+       * 'adminStatusId' field.
+       */
+      const projectTypeModel = await ProjectTypeModel.findOneAndUpdate(
         {
           _id: projectTypeId,
         },
@@ -37,12 +45,33 @@ export const projectTypeControllerDeleteProjectType: IProjectTypeControllerDelet
         },
       );
 
+      /*
+       * Use the standard controller response object,
+       * 'stat', to return the primary key of the
+       * "soft deleted" model.
+       */
       stat.error = false;
-      stat.payload = { projectTypeId };
+      stat.payload = { projectTypeId: projectTypeModel.id };
+
+      /*
+       * Cast the response object to
+       * 'IProjectTypeControllerDeleteProjectTypeOutputSuccess',
+       * where the casting interface is a component of
+       * the binary union type
+       * 'IProjectTypeControllerDeleteProjectTypeOutput'.
+       */
       return stat as IProjectTypeControllerDeleteProjectTypeOutputSuccess;
     } catch (error) {
+      /*
+       * Use the standard controller response object,
+       * 'stat', to return the error message.
+       */
       const { message } = error;
       stat.payload = { message };
+
+      /*
+       * Cast the response object to 'IProjectTypeControllerDeleteProjectTypeOutputError',
+       */
       return stat as IProjectTypeControllerDeleteProjectTypeOutputError;
     }
   };

@@ -25,9 +25,10 @@ import { Types } from 'mongoose';
  * @param { number } params.updatedAt
  *
  * @returns { Promise<ITemplateControllerCreateTemplateOutput> }
+ * @returns { Promise<ITemplateControllerCreateTemplateOutputError> } ON ERROR: Promise<{ error: true, payload: { message }}>
+ * @returns { Promise<ITemplateControllerCreateTemplateOutputSuccess> } ON SUCCESS: Promise<{ error: false, payload: { templateModel }}>
  *
- * @example On succcess returns: Promise<{ error: false, payload: { templateModel }}>
- * @example On failure returns: Promise<{ error: true, payload: { message }}> On failure
+ * @author Datr.Tech Admin <admin@datr.tech>
  */
 export const templateControllerCreateTemplate: ITemplateControllerCreateTemplate =
   async ({
@@ -44,6 +45,10 @@ export const templateControllerCreateTemplate: ITemplateControllerCreateTemplate
     const stat = { ...baseStat };
 
     try {
+      /*
+       * Populate the local 'modelParams' variable
+       * with the received inputs.
+       */
       const templateId = new Types.ObjectId();
       const modelParams = {
         templateId,
@@ -58,15 +63,44 @@ export const templateControllerCreateTemplate: ITemplateControllerCreateTemplate
         updatedAt,
       };
 
+      /*
+       * Use the populated 'modelParams' variable
+       * to create a new instance of 'TemplateModel'.
+       * 'db-freight'.
+       */
       const templateModel = new TemplateModel(modelParams);
+
+      /*
+       * The save the created model to the associated store: 'db-freight',
+       */
       await templateModel.save();
 
+      /*
+       * Use the standard controller response object,
+       * 'stat', to return the found model.
+       */
       stat.error = false;
-      stat.payload = { templateId };
+      stat.payload = { templateId: templateModel.id };
+
+      /*
+       * Cast the response object to
+       * 'ITemplateControllerCreateTemplateOutputSuccess',
+       * where the casting interface is a component of
+       * the binary union type
+       * 'ITemplateControllerCreateTemplateOutput'.
+       */
       return stat as ITemplateControllerCreateTemplateOutputSuccess;
     } catch (error) {
+      /*
+       * Use the standard controller response object,
+       * 'stat', to return the error message.
+       */
       const { message } = error;
       stat.payload = { message };
+
+      /*
+       * Cast the response object to 'ITemplateControllerCreateTemplateOutputError',
+       */
       return stat as ITemplateControllerCreateTemplateOutputError;
     }
   };

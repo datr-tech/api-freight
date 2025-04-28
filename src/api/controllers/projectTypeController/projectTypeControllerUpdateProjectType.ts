@@ -21,15 +21,23 @@ import {
  * @param { number } params.payload.updatedAt  (Optional)
  *
  * @returns { Promise<IProjectTypeControllerUpdateProjectTypeOutput> }
+ * @returns { Promise<IProjectTypeControllerUpdateProjectTypeOutputError> } ON ERROR: Promise<{ error: true, payload: { message }}>
+ * @returns { Promise<IProjectTypeControllerUpdateProjectTypeOutputSuccess> } ON SUCCESS: Promise<{ error: false, payload: { projectTypeModel }}>
  *
- * @example On succcess returns: Promise<{ error: false, payload: { projectTypeModel }}>
- * @example On failure returns: Promise<{ error: true, payload: { message }}> On failure
+ * @author Datr.Tech Admin <admin@datr.tech>
  */
 export const projectTypeControllerUpdateProjectType: IProjectTypeControllerUpdateProjectType =
   async ({ projectTypeId, payload }) => {
     const stat = { ...baseStat };
 
     try {
+      /*
+       * Attempt to find an instance of 'ProjectTypeModel'
+       * using the received 'projectTypeId' param.
+       * When successful, update the found model using
+       * the key value pairs (or fields) from within the
+       * 'payload' param.
+       */
       await ProjectTypeModel.findOneAndUpdate(
         {
           _id: projectTypeId,
@@ -40,12 +48,30 @@ export const projectTypeControllerUpdateProjectType: IProjectTypeControllerUpdat
         },
       );
 
+      /*
+       * Use the standard controller response object,
+       * 'stat', to return the updated model's primary key.
+       */
       stat.error = false;
       stat.payload = { projectTypeId };
+
+      /*
+       * Cast the response object to 'IProjectTypeControllerUpdateProjectTypeOutputSuccess',
+       * where the casting interface is a component of the binary union type
+       * 'IProjectTypeControllerUpdateProjectTypeOutput'.
+       */
       return stat as IProjectTypeControllerUpdateProjectTypeOutputSuccess;
     } catch (error) {
+      /*
+       * Use the standard controller response object,
+       * 'stat', to return the error message.
+       */
       const { message } = error;
       stat.payload = { message };
+
+      /*
+       * Cast the response object to 'IProjectTypeControllerUpdateProjectTypeOutputError',
+       */
       return stat as IProjectTypeControllerUpdateProjectTypeOutputError;
     }
   };

@@ -16,9 +16,10 @@ import { Types } from 'mongoose';
  * @param { Types.ObjectId } params.projectId
  *
  * @returns { Promise<IProjectControllerDeleteProjectOutput> }
+ * @returns { Promise<IProjectControllerDeleteProjectOutputError> } ON ERROR: Promise<{ error: true, payload: { message }}>
+ * @returns { Promise<IProjectControllerDeleteProjectOutputSuccess> } ON SUCCESS: Promise<{ error: false, payload: { projectModel }}>
  *
- * @example On succcess returns: Promise<{ error: false, payload: { projectModel }}>
- * @example On failure returns: Promise<{ error: true, payload: { message }}> On failure
+ * @author Datr.Tech Admin <admin@datr.tech>
  */
 export const projectControllerDeleteProject: IProjectControllerDeleteProject = async ({
   projectId,
@@ -26,7 +27,14 @@ export const projectControllerDeleteProject: IProjectControllerDeleteProject = a
   const stat = { ...baseStat };
 
   try {
-    await ProjectModel.findOneAndUpdate(
+    /*
+     * Attempt to find an instance of 'ProjectModel'
+     * using the received 'projectId' param.
+     * When successful, perform a "soft delete" upon the
+     * found model by updating the value of the model's
+     * 'adminStatusId' field.
+     */
+    const projectModel = await ProjectModel.findOneAndUpdate(
       {
         _id: projectId,
       },
@@ -38,12 +46,33 @@ export const projectControllerDeleteProject: IProjectControllerDeleteProject = a
       },
     );
 
+    /*
+     * Use the standard controller response object,
+     * 'stat', to return the primary key of the
+     * "soft deleted" model.
+     */
     stat.error = false;
-    stat.payload = { projectId };
+    stat.payload = { projectId: projectModel.id };
+
+    /*
+     * Cast the response object to
+     * 'IProjectControllerDeleteProjectOutputSuccess',
+     * where the casting interface is a component of
+     * the binary union type
+     * 'IProjectControllerDeleteProjectOutput'.
+     */
     return stat as IProjectControllerDeleteProjectOutputSuccess;
   } catch (error) {
+    /*
+     * Use the standard controller response object,
+     * 'stat', to return the error message.
+     */
     const { message } = error;
     stat.payload = { message };
+
+    /*
+     * Cast the response object to 'IProjectControllerDeleteProjectOutputError',
+     */
     return stat as IProjectControllerDeleteProjectOutputError;
   }
 };

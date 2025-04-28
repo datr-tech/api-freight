@@ -16,16 +16,24 @@ import { Types } from 'mongoose';
  * @param { Types.ObjectId } params.campaignTypeId
  *
  * @returns { Promise<ICampaignTypeControllerDeleteCampaignTypeOutput> }
+ * @returns { Promise<ICampaignTypeControllerDeleteCampaignTypeOutputError> } ON ERROR: Promise<{ error: true, payload: { message }}>
+ * @returns { Promise<ICampaignTypeControllerDeleteCampaignTypeOutputSuccess> } ON SUCCESS: Promise<{ error: false, payload: { campaignTypeModel }}>
  *
- * @example On succcess returns: Promise<{ error: false, payload: { campaignTypeModel }}>
- * @example On failure returns: Promise<{ error: true, payload: { message }}> On failure
+ * @author Datr.Tech Admin <admin@datr.tech>
  */
 export const campaignTypeControllerDeleteCampaignType: ICampaignTypeControllerDeleteCampaignType =
   async ({ campaignTypeId }) => {
     const stat = { ...baseStat };
 
     try {
-      await CampaignTypeModel.findOneAndUpdate(
+      /*
+       * Attempt to find an instance of 'CampaignTypeModel'
+       * using the received 'campaignTypeId' param.
+       * When successful, perform a "soft delete" upon the
+       * found model by updating the value of the model's
+       * 'adminStatusId' field.
+       */
+      const campaignTypeModel = await CampaignTypeModel.findOneAndUpdate(
         {
           _id: campaignTypeId,
         },
@@ -37,12 +45,33 @@ export const campaignTypeControllerDeleteCampaignType: ICampaignTypeControllerDe
         },
       );
 
+      /*
+       * Use the standard controller response object,
+       * 'stat', to return the primary key of the
+       * "soft deleted" model.
+       */
       stat.error = false;
-      stat.payload = { campaignTypeId };
+      stat.payload = { campaignTypeId: campaignTypeModel.id };
+
+      /*
+       * Cast the response object to
+       * 'ICampaignTypeControllerDeleteCampaignTypeOutputSuccess',
+       * where the casting interface is a component of
+       * the binary union type
+       * 'ICampaignTypeControllerDeleteCampaignTypeOutput'.
+       */
       return stat as ICampaignTypeControllerDeleteCampaignTypeOutputSuccess;
     } catch (error) {
+      /*
+       * Use the standard controller response object,
+       * 'stat', to return the error message.
+       */
       const { message } = error;
       stat.payload = { message };
+
+      /*
+       * Cast the response object to 'ICampaignTypeControllerDeleteCampaignTypeOutputError',
+       */
       return stat as ICampaignTypeControllerDeleteCampaignTypeOutputError;
     }
   };

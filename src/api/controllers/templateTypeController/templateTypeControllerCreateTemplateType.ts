@@ -22,15 +22,20 @@ import { Types } from 'mongoose';
  * @param { number } params.updatedAt
  *
  * @returns { Promise<ITemplateTypeControllerCreateTemplateTypeOutput> }
+ * @returns { Promise<ITemplateTypeControllerCreateTemplateTypeOutputError> } ON ERROR: Promise<{ error: true, payload: { message }}>
+ * @returns { Promise<ITemplateTypeControllerCreateTemplateTypeOutputSuccess> } ON SUCCESS: Promise<{ error: false, payload: { templateTypeModel }}>
  *
- * @example On succcess returns: Promise<{ error: false, payload: { templateTypeModel }}>
- * @example On failure returns: Promise<{ error: true, payload: { message }}> On failure
+ * @author Datr.Tech Admin <admin@datr.tech>
  */
 export const templateTypeControllerCreateTemplateType: ITemplateTypeControllerCreateTemplateType =
   async ({ description, name, adminStatusId, adminUserId, createdAt, updatedAt }) => {
     const stat = { ...baseStat };
 
     try {
+      /*
+       * Populate the local 'modelParams' variable
+       * with the received inputs.
+       */
       const templateTypeId = new Types.ObjectId();
       const modelParams = {
         templateTypeId,
@@ -42,15 +47,44 @@ export const templateTypeControllerCreateTemplateType: ITemplateTypeControllerCr
         updatedAt,
       };
 
+      /*
+       * Use the populated 'modelParams' variable
+       * to create a new instance of 'TemplateTypeModel'.
+       * 'db-freight'.
+       */
       const templateTypeModel = new TemplateTypeModel(modelParams);
+
+      /*
+       * The save the created model to the associated store: 'db-freight',
+       */
       await templateTypeModel.save();
 
+      /*
+       * Use the standard controller response object,
+       * 'stat', to return the found model.
+       */
       stat.error = false;
-      stat.payload = { templateTypeId };
+      stat.payload = { templateTypeId: templateTypeModel.id };
+
+      /*
+       * Cast the response object to
+       * 'ITemplateTypeControllerCreateTemplateTypeOutputSuccess',
+       * where the casting interface is a component of
+       * the binary union type
+       * 'ITemplateTypeControllerCreateTemplateTypeOutput'.
+       */
       return stat as ITemplateTypeControllerCreateTemplateTypeOutputSuccess;
     } catch (error) {
+      /*
+       * Use the standard controller response object,
+       * 'stat', to return the error message.
+       */
       const { message } = error;
       stat.payload = { message };
+
+      /*
+       * Cast the response object to 'ITemplateTypeControllerCreateTemplateTypeOutputError',
+       */
       return stat as ITemplateTypeControllerCreateTemplateTypeOutputError;
     }
   };

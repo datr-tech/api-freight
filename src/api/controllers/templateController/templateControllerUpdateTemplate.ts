@@ -24,15 +24,23 @@ import {
  * @param { number } params.payload.updatedAt  (Optional)
  *
  * @returns { Promise<ITemplateControllerUpdateTemplateOutput> }
+ * @returns { Promise<ITemplateControllerUpdateTemplateOutputError> } ON ERROR: Promise<{ error: true, payload: { message }}>
+ * @returns { Promise<ITemplateControllerUpdateTemplateOutputSuccess> } ON SUCCESS: Promise<{ error: false, payload: { templateModel }}>
  *
- * @example On succcess returns: Promise<{ error: false, payload: { templateModel }}>
- * @example On failure returns: Promise<{ error: true, payload: { message }}> On failure
+ * @author Datr.Tech Admin <admin@datr.tech>
  */
 export const templateControllerUpdateTemplate: ITemplateControllerUpdateTemplate =
   async ({ templateId, payload }) => {
     const stat = { ...baseStat };
 
     try {
+      /*
+       * Attempt to find an instance of 'TemplateModel'
+       * using the received 'templateId' param.
+       * When successful, update the found model using
+       * the key value pairs (or fields) from within the
+       * 'payload' param.
+       */
       await TemplateModel.findOneAndUpdate(
         {
           _id: templateId,
@@ -43,12 +51,30 @@ export const templateControllerUpdateTemplate: ITemplateControllerUpdateTemplate
         },
       );
 
+      /*
+       * Use the standard controller response object,
+       * 'stat', to return the updated model's primary key.
+       */
       stat.error = false;
       stat.payload = { templateId };
+
+      /*
+       * Cast the response object to 'ITemplateControllerUpdateTemplateOutputSuccess',
+       * where the casting interface is a component of the binary union type
+       * 'ITemplateControllerUpdateTemplateOutput'.
+       */
       return stat as ITemplateControllerUpdateTemplateOutputSuccess;
     } catch (error) {
+      /*
+       * Use the standard controller response object,
+       * 'stat', to return the error message.
+       */
       const { message } = error;
       stat.payload = { message };
+
+      /*
+       * Cast the response object to 'ITemplateControllerUpdateTemplateOutputError',
+       */
       return stat as ITemplateControllerUpdateTemplateOutputError;
     }
   };

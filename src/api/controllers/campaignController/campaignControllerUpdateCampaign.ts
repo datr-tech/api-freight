@@ -24,15 +24,23 @@ import {
  * @param { number } params.payload.updatedAt  (Optional)
  *
  * @returns { Promise<ICampaignControllerUpdateCampaignOutput> }
+ * @returns { Promise<ICampaignControllerUpdateCampaignOutputError> } ON ERROR: Promise<{ error: true, payload: { message }}>
+ * @returns { Promise<ICampaignControllerUpdateCampaignOutputSuccess> } ON SUCCESS: Promise<{ error: false, payload: { campaignModel }}>
  *
- * @example On succcess returns: Promise<{ error: false, payload: { campaignModel }}>
- * @example On failure returns: Promise<{ error: true, payload: { message }}> On failure
+ * @author Datr.Tech Admin <admin@datr.tech>
  */
 export const campaignControllerUpdateCampaign: ICampaignControllerUpdateCampaign =
   async ({ campaignId, payload }) => {
     const stat = { ...baseStat };
 
     try {
+      /*
+       * Attempt to find an instance of 'CampaignModel'
+       * using the received 'campaignId' param.
+       * When successful, update the found model using
+       * the key value pairs (or fields) from within the
+       * 'payload' param.
+       */
       await CampaignModel.findOneAndUpdate(
         {
           _id: campaignId,
@@ -43,12 +51,30 @@ export const campaignControllerUpdateCampaign: ICampaignControllerUpdateCampaign
         },
       );
 
+      /*
+       * Use the standard controller response object,
+       * 'stat', to return the updated model's primary key.
+       */
       stat.error = false;
       stat.payload = { campaignId };
+
+      /*
+       * Cast the response object to 'ICampaignControllerUpdateCampaignOutputSuccess',
+       * where the casting interface is a component of the binary union type
+       * 'ICampaignControllerUpdateCampaignOutput'.
+       */
       return stat as ICampaignControllerUpdateCampaignOutputSuccess;
     } catch (error) {
+      /*
+       * Use the standard controller response object,
+       * 'stat', to return the error message.
+       */
       const { message } = error;
       stat.payload = { message };
+
+      /*
+       * Cast the response object to 'ICampaignControllerUpdateCampaignOutputError',
+       */
       return stat as ICampaignControllerUpdateCampaignOutputError;
     }
   };

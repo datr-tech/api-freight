@@ -25,9 +25,10 @@ import { Types } from 'mongoose';
  * @param { number } params.updatedAt
  *
  * @returns { Promise<IProjectControllerCreateProjectOutput> }
+ * @returns { Promise<IProjectControllerCreateProjectOutputError> } ON ERROR: Promise<{ error: true, payload: { message }}>
+ * @returns { Promise<IProjectControllerCreateProjectOutputSuccess> } ON SUCCESS: Promise<{ error: false, payload: { projectModel }}>
  *
- * @example On succcess returns: Promise<{ error: false, payload: { projectModel }}>
- * @example On failure returns: Promise<{ error: true, payload: { message }}> On failure
+ * @author Datr.Tech Admin <admin@datr.tech>
  */
 export const projectControllerCreateProject: IProjectControllerCreateProject = async ({
   projectTypeId,
@@ -43,6 +44,10 @@ export const projectControllerCreateProject: IProjectControllerCreateProject = a
   const stat = { ...baseStat };
 
   try {
+    /*
+     * Populate the local 'modelParams' variable
+     * with the received inputs.
+     */
     const projectId = new Types.ObjectId();
     const modelParams = {
       projectId,
@@ -57,15 +62,44 @@ export const projectControllerCreateProject: IProjectControllerCreateProject = a
       updatedAt,
     };
 
+    /*
+     * Use the populated 'modelParams' variable
+     * to create a new instance of 'ProjectModel'.
+     * 'db-freight'.
+     */
     const projectModel = new ProjectModel(modelParams);
+
+    /*
+     * The save the created model to the associated store: 'db-freight',
+     */
     await projectModel.save();
 
+    /*
+     * Use the standard controller response object,
+     * 'stat', to return the found model.
+     */
     stat.error = false;
-    stat.payload = { projectId };
+    stat.payload = { projectId: projectModel.id };
+
+    /*
+     * Cast the response object to
+     * 'IProjectControllerCreateProjectOutputSuccess',
+     * where the casting interface is a component of
+     * the binary union type
+     * 'IProjectControllerCreateProjectOutput'.
+     */
     return stat as IProjectControllerCreateProjectOutputSuccess;
   } catch (error) {
+    /*
+     * Use the standard controller response object,
+     * 'stat', to return the error message.
+     */
     const { message } = error;
     stat.payload = { message };
+
+    /*
+     * Cast the response object to 'IProjectControllerCreateProjectOutputError',
+     */
     return stat as IProjectControllerCreateProjectOutputError;
   }
 };

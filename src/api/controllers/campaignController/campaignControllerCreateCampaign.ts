@@ -25,9 +25,10 @@ import { Types } from 'mongoose';
  * @param { number } params.updatedAt
  *
  * @returns { Promise<ICampaignControllerCreateCampaignOutput> }
+ * @returns { Promise<ICampaignControllerCreateCampaignOutputError> } ON ERROR: Promise<{ error: true, payload: { message }}>
+ * @returns { Promise<ICampaignControllerCreateCampaignOutputSuccess> } ON SUCCESS: Promise<{ error: false, payload: { campaignModel }}>
  *
- * @example On succcess returns: Promise<{ error: false, payload: { campaignModel }}>
- * @example On failure returns: Promise<{ error: true, payload: { message }}> On failure
+ * @author Datr.Tech Admin <admin@datr.tech>
  */
 export const campaignControllerCreateCampaign: ICampaignControllerCreateCampaign =
   async ({
@@ -44,6 +45,10 @@ export const campaignControllerCreateCampaign: ICampaignControllerCreateCampaign
     const stat = { ...baseStat };
 
     try {
+      /*
+       * Populate the local 'modelParams' variable
+       * with the received inputs.
+       */
       const campaignId = new Types.ObjectId();
       const modelParams = {
         campaignId,
@@ -58,15 +63,44 @@ export const campaignControllerCreateCampaign: ICampaignControllerCreateCampaign
         updatedAt,
       };
 
+      /*
+       * Use the populated 'modelParams' variable
+       * to create a new instance of 'CampaignModel'.
+       * 'db-freight'.
+       */
       const campaignModel = new CampaignModel(modelParams);
+
+      /*
+       * The save the created model to the associated store: 'db-freight',
+       */
       await campaignModel.save();
 
+      /*
+       * Use the standard controller response object,
+       * 'stat', to return the found model.
+       */
       stat.error = false;
-      stat.payload = { campaignId };
+      stat.payload = { campaignId: campaignModel.id };
+
+      /*
+       * Cast the response object to
+       * 'ICampaignControllerCreateCampaignOutputSuccess',
+       * where the casting interface is a component of
+       * the binary union type
+       * 'ICampaignControllerCreateCampaignOutput'.
+       */
       return stat as ICampaignControllerCreateCampaignOutputSuccess;
     } catch (error) {
+      /*
+       * Use the standard controller response object,
+       * 'stat', to return the error message.
+       */
       const { message } = error;
       stat.payload = { message };
+
+      /*
+       * Cast the response object to 'ICampaignControllerCreateCampaignOutputError',
+       */
       return stat as ICampaignControllerCreateCampaignOutputError;
     }
   };
