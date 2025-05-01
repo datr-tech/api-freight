@@ -33,7 +33,7 @@ export const projectTypeControllerDeleteProjectType: IProjectTypeControllerDelet
        * found model by updating the value of the model's
        * 'adminStatusId' field.
        */
-      const projectTypeModel = await ProjectTypeModel.findOneAndUpdate(
+      await ProjectTypeModel.findOneAndUpdate(
         {
           _id: projectTypeId,
         },

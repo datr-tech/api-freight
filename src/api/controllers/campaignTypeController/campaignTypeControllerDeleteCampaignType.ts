@@ -33,7 +33,7 @@ export const campaignTypeControllerDeleteCampaignType: ICampaignTypeControllerDe
        * found model by updating the value of the model's
        * 'adminStatusId' field.
        */
-      const campaignTypeModel = await CampaignTypeModel.findOneAndUpdate(
+      await CampaignTypeModel.findOneAndUpdate(
         {
           _id: campaignTypeId,
         },

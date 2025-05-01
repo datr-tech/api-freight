@@ -33,7 +33,7 @@ export const campaignControllerDeleteCampaign: ICampaignControllerDeleteCampaign
        * found model by updating the value of the model's
        * 'adminStatusId' field.
        */
-      const campaignModel = await CampaignModel.findOneAndUpdate(
+      await CampaignModel.findOneAndUpdate(
         {
           _id: campaignId,
         },

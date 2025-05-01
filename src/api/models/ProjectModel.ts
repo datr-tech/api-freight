@@ -3,12 +3,15 @@ import {
   modelValidatorAdminUserId,
   modelValidatorOrganisationId,
   modelValidatorOwnerUserId,
-  modelValidatorProjectTypeId,
-} from '@app-af/api/modelValidators';
+} from '@app-af/api/modelValidators/foreign';
+
+import { modelValidatorProjectTypeId } from '@app-af/api/modelValidators/local';
+
 import {
   projectModelSchema,
   projectModelSchemaOptions,
 } from '@datr.tech/parcel-model-schemas-freight';
+
 import { model, Schema } from 'mongoose';
 
 const projectSchema = new Schema(projectModelSchema, projectModelSchemaOptions);

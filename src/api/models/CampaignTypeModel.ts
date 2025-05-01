@@ -1,11 +1,13 @@
 import {
   modelValidatorAdminStatusId,
   modelValidatorAdminUserId,
-} from '@app-af/api/modelValidators';
+} from '@app-af/api/modelValidators/foreign';
+
 import {
   campaignTypeModelSchema,
   campaignTypeModelSchemaOptions,
 } from '@datr.tech/parcel-model-schemas-freight';
+
 import { model, Schema } from 'mongoose';
 
 const campaignTypeSchema = new Schema(

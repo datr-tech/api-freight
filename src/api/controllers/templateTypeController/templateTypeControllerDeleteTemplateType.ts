@@ -33,7 +33,7 @@ export const templateTypeControllerDeleteTemplateType: ITemplateTypeControllerDe
        * found model by updating the value of the model's
        * 'adminStatusId' field.
        */
-      const templateTypeModel = await TemplateTypeModel.findOneAndUpdate(
+      await TemplateTypeModel.findOneAndUpdate(
         {
           _id: templateTypeId,
         },

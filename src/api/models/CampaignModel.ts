@@ -1,14 +1,18 @@
 import {
   modelValidatorAdminStatusId,
   modelValidatorAdminUserId,
-  modelValidatorCampaignTypeId,
   modelValidatorOwnerUserId,
-  modelValidatorProjectId,
-} from '@app-af/api/modelValidators';
+} from '@app-af/api/modelValidators/foreign';
+
+import { modelValidatorCampaignTypeId } from '@app-af/api/modelValidators/local/modelValidatorCampaignTypeId';
+
+import { modelValidatorProjectId } from '@app-af/api/modelValidators/local/modelValidatorProjectId';
+
 import {
   campaignModelSchema,
   campaignModelSchemaOptions,
 } from '@datr.tech/parcel-model-schemas-freight';
+
 import { model, Schema } from 'mongoose';
 
 const campaignSchema = new Schema(campaignModelSchema, campaignModelSchemaOptions);

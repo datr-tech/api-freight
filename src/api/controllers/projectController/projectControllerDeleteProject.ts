@@ -34,7 +34,7 @@ export const projectControllerDeleteProject: IProjectControllerDeleteProject = a
      * found model by updating the value of the model's
      * 'adminStatusId' field.
      */
-    const projectModel = await ProjectModel.findOneAndUpdate(
+    await ProjectModel.findOneAndUpdate(
       {
         _id: projectId,
       },
