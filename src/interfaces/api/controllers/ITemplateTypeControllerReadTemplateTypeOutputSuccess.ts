@@ -4,5 +4,6 @@ export interface ITemplateTypeControllerReadTemplateTypeOutputSuccess {
   error: false;
   payload: {
     templateTypeModel: ITemplateTypeModel;
+    responseStatusCode: number;
   };
 }

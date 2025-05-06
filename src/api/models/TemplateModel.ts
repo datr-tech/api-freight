@@ -4,10 +4,9 @@ import {
   modelValidatorOwnerUserId,
 } from '@app-af/api/modelValidators/foreign';
 
-import {
-  modelValidatorCampaignId,
-  modelValidatorTemplateTypeId,
-} from '@app-af/api/modelValidators/local';
+import { modelValidatorCampaignId } from '@app-af/api/modelValidators/local/modelValidatorCampaignId';
+
+import { modelValidatorTemplateTypeId } from '@app-af/api/modelValidators/local/modelValidatorTemplateTypeId';
 
 import {
   templateModelSchema,

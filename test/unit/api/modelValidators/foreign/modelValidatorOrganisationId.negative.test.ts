@@ -3,11 +3,11 @@ const personaServiceHasOrganisationMock = jest.fn().mockReturnValue(false);
 jest.mock('@datr.tech/leith-common-services', () => ({
   __esModule: true,
   personaService: {
-		hasOrganisation: personaServiceHasOrganisationMock
-  }
+    hasOrganisation: personaServiceHasOrganisationMock,
+  },
 }));
 
-import { modelValidatorOrganisationId } from "@app-af/api/modelValidators/foreign";
+import { modelValidatorOrganisationId } from '@app-af/api/modelValidators/foreign';
 import { Types } from 'mongoose';
 
 /**
@@ -18,13 +18,13 @@ import { Types } from 'mongoose';
  *
  * @author Datr.Tech Admin <admin@datr.tech>
  */
-describe( "modelValidatorOrganisationId", () => {
-	describe("negative", () => {
-		test("should throw the expected error when the underlying personaService (mocked) returns false", async () => {
-			/*
+describe('modelValidatorOrganisationId', () => {
+  describe('negative', () => {
+    test('should throw the expected error when the underlying personaService (mocked) returns false', async () => {
+      /*
        * Arrange
        */
-			const errorExpected = "organisationId: invalid";
+      const errorExpected = 'organisationId: invalid';
       const idMock = new Types.ObjectId();
       const docMock = { organisationId: idMock };
       const nextMock = jest.fn();
@@ -32,17 +32,19 @@ describe( "modelValidatorOrganisationId", () => {
       /*
        * Act
        */
-			const handler = async () => {
-				await modelValidatorOrganisationId(docMock, nextMock);
-			};
+      const handler = async () => {
+        await modelValidatorOrganisationId(docMock, nextMock);
+      };
 
-			/*
+      /*
        * Assert
        */
-			await expect(handler()).rejects.toThrowError(errorExpected);
-		  expect( personaServiceHasOrganisationMock ).toHaveBeenCalledTimes(1);
-		  expect( personaServiceHasOrganisationMock ).toHaveBeenCalledWith(expect.objectContaining({ organisationId: idMock }));
-			expect(nextMock).not.toHaveBeenCalled();
-		});
-	});
-}); 
+      await expect(handler()).rejects.toThrowError(errorExpected);
+      expect(personaServiceHasOrganisationMock).toHaveBeenCalledTimes(1);
+      expect(personaServiceHasOrganisationMock).toHaveBeenCalledWith(
+        expect.objectContaining({ organisationId: idMock }),
+      );
+      expect(nextMock).not.toHaveBeenCalled();
+    });
+  });
+});

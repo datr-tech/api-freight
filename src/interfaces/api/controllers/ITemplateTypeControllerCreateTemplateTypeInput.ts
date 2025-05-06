@@ -6,5 +6,5 @@ export interface ITemplateTypeControllerCreateTemplateTypeInput {
   adminStatusId: Types.ObjectId;
   adminUserId: Types.ObjectId;
   createdAt?: number;
-  updatedAt: number;
+  updatedAt?: number;
 }

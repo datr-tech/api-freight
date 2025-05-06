@@ -5,7 +5,7 @@ import {
   modelValidatorOwnerUserId,
 } from '@app-af/api/modelValidators/foreign';
 
-import { modelValidatorProjectTypeId } from '@app-af/api/modelValidators/local';
+import { modelValidatorProjectTypeId } from '@app-af/api/modelValidators/local/modelValidatorProjectTypeId';
 
 import {
   projectModelSchema,

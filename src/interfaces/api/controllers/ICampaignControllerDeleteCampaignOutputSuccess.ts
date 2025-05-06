@@ -4,5 +4,6 @@ export interface ICampaignControllerDeleteCampaignOutputSuccess {
   error: false;
   payload: {
     campaignId: Types.ObjectId;
+    responseStatusCode: number;
   };
 }

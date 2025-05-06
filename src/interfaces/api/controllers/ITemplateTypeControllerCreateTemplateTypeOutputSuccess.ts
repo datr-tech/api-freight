@@ -4,5 +4,6 @@ export interface ITemplateTypeControllerCreateTemplateTypeOutputSuccess {
   error: false;
   payload: {
     templateTypeId: Types.ObjectId;
+    responseStatusCode: number;
   };
 }

@@ -4,5 +4,6 @@ export interface ICampaignTypeControllerReadCampaignTypeOutputSuccess {
   error: false;
   payload: {
     campaignTypeModel: ICampaignTypeModel;
+    responseStatusCode: number;
   };
 }

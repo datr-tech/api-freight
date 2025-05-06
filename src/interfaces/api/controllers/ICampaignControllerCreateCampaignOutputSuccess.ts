@@ -4,5 +4,6 @@ export interface ICampaignControllerCreateCampaignOutputSuccess {
   error: false;
   payload: {
     campaignId: Types.ObjectId;
+    responseStatusCode: number;
   };
 }

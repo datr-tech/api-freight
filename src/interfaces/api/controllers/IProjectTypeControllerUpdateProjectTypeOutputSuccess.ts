@@ -4,5 +4,6 @@ export interface IProjectTypeControllerUpdateProjectTypeOutputSuccess {
   error: false;
   payload: {
     projectTypeId: Types.ObjectId;
+    responseStatusCode: number;
   };
 }

@@ -22,7 +22,7 @@ import { Types } from 'mongoose';
  * @param { Types.ObjectId } params.adminStatusId
  * @param { Types.ObjectId } params.adminUserId
  * @param { number } params.createdAt  (Optional)
- * @param { number } params.updatedAt
+ * @param { number } params.updatedAt  (Optional)
  *
  * @returns { Promise<IProjectControllerCreateProjectOutput> }
  * @returns { Promise<IProjectControllerCreateProjectOutputError> } ON ERROR: Promise<{ error: true, payload: { message }}>
@@ -76,7 +76,10 @@ export const projectControllerCreateProject: IProjectControllerCreateProject = a
      * 'stat', to return the found model's primary key.
      */
     stat.error = false;
-    stat.payload = { projectId };
+    stat.payload = {
+      projectId,
+      responseStatusCode: 201,
+    };
 
     /*
      * Cast the response object to
@@ -91,7 +94,10 @@ export const projectControllerCreateProject: IProjectControllerCreateProject = a
      * 'stat', to return the error message.
      */
     const { message } = error;
-    stat.payload = { message };
+    stat.payload = {
+      message,
+      responseStatusCode: 404,
+    };
 
     /*
      * Cast the response object to 'IProjectControllerCreateProjectOutputError',

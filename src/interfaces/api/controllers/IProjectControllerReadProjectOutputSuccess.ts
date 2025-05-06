@@ -4,5 +4,6 @@ export interface IProjectControllerReadProjectOutputSuccess {
   error: false;
   payload: {
     projectModel: IProjectModel;
+    responseStatusCode: number;
   };
 }

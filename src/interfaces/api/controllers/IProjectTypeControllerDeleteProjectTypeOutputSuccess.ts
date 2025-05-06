@@ -4,5 +4,6 @@ export interface IProjectTypeControllerDeleteProjectTypeOutputSuccess {
   error: false;
   payload: {
     projectTypeId: Types.ObjectId;
+    responseStatusCode: number;
   };
 }

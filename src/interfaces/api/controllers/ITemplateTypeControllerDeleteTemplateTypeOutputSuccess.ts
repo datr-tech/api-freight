@@ -4,5 +4,6 @@ export interface ITemplateTypeControllerDeleteTemplateTypeOutputSuccess {
   error: false;
   payload: {
     templateTypeId: Types.ObjectId;
+    responseStatusCode: number;
   };
 }
