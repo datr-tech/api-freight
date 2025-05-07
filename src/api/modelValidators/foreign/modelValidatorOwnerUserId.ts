@@ -11,7 +11,6 @@ export const modelValidatorOwnerUserId = async (doc, next) => {
   if (ownerUserId) {
     hasUser = await personaService.hasUser({
       userId: ownerUserId,
-      isAdmin: false,
     });
   }
 

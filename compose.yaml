@@ -1,10 +1,10 @@
 include:
-  - ../db-dolomite/compose.yaml
+  - ../db-freight/compose.yaml
 
 services:
-  api-dolomite:
+  api-freight:
     build: .
-    container_name: api-dolomite
+    container_name: api-freight
     ports:
       - "${API_PORT}:${API_PORT}"
     healthcheck:
@@ -12,12 +12,11 @@ services:
       interval: 10s
       timeout: 10s
       retries: 3
-      start_period: 30s
+      start_period: 50s
     networks:
-      - net-dolomite
+      - net-freight
     depends_on:
-      - db-dolomite
-
+      - db-freight
 networks:
-  net-dolomite:
+  net-freight:
     driver: bridge
